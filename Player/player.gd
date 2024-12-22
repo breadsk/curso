@@ -9,5 +9,5 @@ func move():
 	#Vector con los 4 mapas de entradas
 	#var direction = Input.get_vector("left","right","up","down").normalized()
 	#velocity = direction * speed
-	velocity = Input.get_vector("left","right","up","down")
+	velocity = Input.get_vector("left","right","up","down") * speed
 	move_and_slide()
