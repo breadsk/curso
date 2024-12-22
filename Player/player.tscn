@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1xi702b12bi0"]
+[gd_scene load_steps=7 format=3 uid="uid://c1xi702b12bi0"]
 
 [ext_resource type="Texture2D" uid="uid://bymorihe3t1qw" path="res://Player/player.png" id="1_dslo6"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_u1pc4"]
@@ -8,9 +8,37 @@ size = Vector2(13, 14)
 
 [sub_resource type="Animation" id="Animation_exwsr"]
 resource_name = "walkD"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.2, 0.366667, 0.533333, 0.7, 0.866667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3), Vector2i(4, 3), Vector2i(5, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_gj05i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 3)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xkbtj"]
 _data = {
+"RESET": SubResource("Animation_gj05i"),
 "walkD": SubResource("Animation_exwsr")
 }
 
@@ -21,6 +49,7 @@ script = ExtResource("1_u1pc4")
 texture = ExtResource("1_dslo6")
 hframes = 6
 vframes = 10
+frame = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 10)
