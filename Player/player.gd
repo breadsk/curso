@@ -6,9 +6,9 @@ extends CharacterBody2D
 
 
 var speed = 100
-var lastDir = ""
+var lastDir = "D"
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	move()
 	animCtrl()
 
@@ -18,6 +18,7 @@ func move():
 	move_and_slide()
 
 func animCtrl():
+	##La primera animación es la predefinida
 	if velocity.x > 0:
 		sprite.flip_h = false;
 		anims.play("walkR")
