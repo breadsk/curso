@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Player
 
 
-var speed = 100
+var speed = 70
 var lastDir = "D"
 
 func _physics_process(_delta: float):

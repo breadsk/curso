@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cltav02fo4cxh"]
+[gd_scene load_steps=12 format=3 uid="uid://cltav02fo4cxh"]
 
 [ext_resource type="Texture2D" uid="uid://cdfdy4kfosxki" path="res://Enemies/slime.png" id="1_23wu6"]
+[ext_resource type="Script" path="res://Enemies/slime.gd" id="1_iggdb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1c7tk"]
 radius = 6.0
@@ -38,21 +39,117 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_bb4fi"]
+resource_name = "idleR"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ogff1"]
+resource_name = "idleU"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_1pneq"]
+resource_name = "walkD"
+length = 0.7
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3), Vector2i(4, 3), Vector2i(5, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_tu2mi"]
+resource_name = "walkR"
+length = 0.7
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4), Vector2i(4, 4), Vector2i(5, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_5ava4"]
+resource_name = "walkU"
+length = 0.7
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5), Vector2i(4, 5), Vector2i(5, 5)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yufrg"]
 _data = {
 "RESET": SubResource("Animation_86ej5"),
-"idleD": SubResource("Animation_58ktw")
+"idleD": SubResource("Animation_58ktw"),
+"idleR": SubResource("Animation_bb4fi"),
+"idleU": SubResource("Animation_ogff1"),
+"walkD": SubResource("Animation_1pneq"),
+"walkR": SubResource("Animation_tu2mi"),
+"walkU": SubResource("Animation_5ava4")
 }
 
 [node name="Slime" type="CharacterBody2D"]
+script = ExtResource("1_iggdb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_23wu6")
 hframes = 7
-vframes = 11
+vframes = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_1c7tk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
