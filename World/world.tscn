@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtikr08sysvmo"]
+[gd_scene load_steps=8 format=3 uid="uid://dtikr08sysvmo"]
 
 [ext_resource type="Texture2D" uid="uid://boc8bxcxchg5o" path="res://World/TileSets/grass.png" id="1_um4wh"]
 [ext_resource type="Texture2D" uid="uid://wanwosusryik" path="res://World/TileSets/decor_8x8.png" id="2_7na74"]
 [ext_resource type="PackedScene" uid="uid://c1xi702b12bi0" path="res://Player/player.tscn" id="2_gcyv7"]
+[ext_resource type="PackedScene" uid="uid://cltav02fo4cxh" path="res://Enemies/slime.tscn" id="4_f0ut4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ejnj"]
 texture = ExtResource("1_um4wh")
@@ -44,3 +45,10 @@ layer_1/tile_data = PackedInt32Array(327686, 1, 1, 786444, 1, 1, 393235, 1, 1, 7
 
 [node name="Player" parent="." instance=ExtResource("2_gcyv7")]
 position = Vector2(148, 88)
+
+[node name="Slime" parent="." node_paths=PackedStringArray("endPoint") instance=ExtResource("4_f0ut4")]
+position = Vector2(245, 79)
+endPoint = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="Slime"]
+position = Vector2(202, 152)
