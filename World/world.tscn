@@ -47,8 +47,15 @@ layer_1/tile_data = PackedInt32Array(327686, 1, 1, 786444, 1, 1, 393235, 1, 1, 7
 position = Vector2(148, 88)
 
 [node name="Slime" parent="." node_paths=PackedStringArray("endPoint") instance=ExtResource("4_f0ut4")]
-position = Vector2(245, 79)
+position = Vector2(268, 182)
 endPoint = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="Slime"]
-position = Vector2(202, 152)
+position = Vector2(62, -91)
+
+[node name="Slime2" parent="." node_paths=PackedStringArray("endPoint") instance=ExtResource("4_f0ut4")]
+position = Vector2(44, 102)
+endPoint = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="Slime2"]
+position = Vector2(50, 108)
