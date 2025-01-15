@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 ##Para iniciar algo antes del que juego inicie
-@onready var anims: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $Player
+@onready var anims: AnimationPlayer = $AnimationPlayer
 
 
 var speed = 70
@@ -20,11 +20,11 @@ func move():
 func animCtrl():
 	##La primera animación es la predefinida
 	if velocity.x > 0:
-		sprite.flip_h = false;
+		sprite.flip_h = false;#El sprite se queda como esta en su dirección, solo se anima.
 		anims.play("walkR")
 		lastDir = "R"
 	elif velocity.x < 0:
-		sprite.flip_h = true;
+		sprite.flip_h = true;#Aqui es cuando esta yendo hacia la izquierda
 		anims.play("walkR")
 		lastDir = "R"
 	elif velocity.y > 0:
