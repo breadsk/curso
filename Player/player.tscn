@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c1xi702b12bi0"]
+[gd_scene load_steps=13 format=3 uid="uid://c1xi702b12bi0"]
 
 [ext_resource type="Texture2D" uid="uid://bymorihe3t1qw" path="res://Player/player.png" id="1_dslo6"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_u1pc4"]
@@ -140,6 +140,9 @@ _data = {
 "walkU": SubResource("Animation_f2oky")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fed4g"]
+size = Vector2(15, 20)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_u1pc4")
 
@@ -157,3 +160,9 @@ libraries = {
 "": SubResource("AnimationLibrary_xkbtj")
 }
 autoplay = "RESET"
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0.5, 8)
+shape = SubResource("RectangleShape2D_fed4g")
