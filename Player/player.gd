@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 ##Para iniciar algo antes del que juego inicie
 @onready var sprite: Sprite2D = $Player
+
+#Animaciones
 @onready var effects: AnimationPlayer = $Effects
 @onready var anims: AnimationPlayer = $AnimationPlayer
 
@@ -39,12 +41,11 @@ func animCtrl():
 		anims.play("idle"+lastDir)#Lo concatena
 
 func hurt():
-	life = life - 1
+	life -= 1
 	effects.play("hurts")
 	print(life)
-	await effects.animation_finished#Espera a que la animacion de effects finalice
+	await effects.animation_finished
 	effects.play("RESET")
-
 
 func _on_hurt_box_body_entered(body: Node2D) -> void:
 	if body.name == "Slime":
