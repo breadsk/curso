@@ -166,3 +166,5 @@ autoplay = "RESET"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0.5, 8)
 shape = SubResource("RectangleShape2D_fed4g")
+
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
