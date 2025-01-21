@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c1xi702b12bi0"]
+[gd_scene load_steps=16 format=3 uid="uid://c1xi702b12bi0"]
 
 [ext_resource type="Texture2D" uid="uid://bymorihe3t1qw" path="res://Player/player.png" id="1_dslo6"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_u1pc4"]
@@ -143,15 +143,68 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fed4g"]
 size = Vector2(15, 20)
 
+[sub_resource type="Animation" id="Animation_bjthj"]
+resource_name = "hurts"
+length = 0.6
+loop_mode = 1
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 2,
+"values": [Color(1, 1, 1, 0.392157), Color(1, 0, 0, 0.211765), Color(1, 1, 1, 0.392157), Color(1, 0, 0, 0.211765)]
+}
+
+[sub_resource type="Animation" id="Animation_i2l72"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.458824)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xm1cj"]
+_data = {
+"RESET": SubResource("Animation_i2l72"),
+"hurts": SubResource("Animation_bjthj")
+}
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_u1pc4")
 
 [node name="Player" type="Sprite2D" parent="."]
+clip_children = 2
 texture = ExtResource("1_dslo6")
 hframes = 6
 vframes = 10
 
+[node name="ColorRect" type="ColorRect" parent="Player"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.458824)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.5, 8)
 shape = SubResource("RectangleShape2D_si05f")
 
@@ -162,9 +215,15 @@ libraries = {
 autoplay = "RESET"
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0.5, 8)
 shape = SubResource("RectangleShape2D_fed4g")
+
+[node name="Effects" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xm1cj")
+}
 
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
