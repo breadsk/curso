@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Player/player.gd" id="1_u1pc4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_si05f"]
-size = Vector2(13, 18)
+size = Vector2(13, 7)
 
 [sub_resource type="Animation" id="Animation_gj05i"]
 loop_mode = 1
@@ -203,8 +203,7 @@ grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0.5, 8)
+position = Vector2(0.5, 13.5)
 shape = SubResource("RectangleShape2D_si05f")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -214,7 +213,6 @@ libraries = {
 autoplay = "RESET"
 
 [node name="HurtBox" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0.5, 8)
