@@ -142,15 +142,17 @@ _data = {
 }
 
 [node name="Slime" type="CharacterBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_iggdb")
 
 [node name="Slime" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
 texture = ExtResource("1_23wu6")
 hframes = 7
 vframes = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, -4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_18ebi")
 

@@ -36,6 +36,7 @@ sources/1 = SubResource("TileSetAtlasSource_snj85")
 [node name="World" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
 tile_set = SubResource("TileSet_qn37d")
 format = 2
 layer_0/name = "BG"
@@ -43,12 +44,12 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0
 layer_1/name = "Decos"
 layer_1/tile_data = PackedInt32Array(327686, 1, 1, 786444, 1, 1, 393235, 1, 1, 786456, 1, 1, 196634, 1, 1, 196623, 1, 1, 786437, 1, 1, 262147, 1, 1, 524299, 1, 1, 524300, 1, 1, 131092, 1, 1, 983058, 65537, 1, 655380, 65537, 1, 458777, 65537, 1, 851994, 65537, 1, 917530, 65537, 1, 983047, 65537, 1, 589832, 65537, 1, 524291, 65537, 1, 983041, 65537, 1, 131073, 65537, 1, 131081, 65537, 1, 524304, 131073, 1, 851983, 131073, 1, 786452, 131073, 1, 458774, 131073, 1, 131095, 131073, 1, 196631, 131073, 1, 65548, 131073, 1, 65561, 131073, 1, 589851, 131073, 1, 917526, 131073, 1, 983065, 131073, 1, 983052, 196609, 1, 786441, 196609, 1, 720898, 196609, 1, 65540, 196609, 1, 8, 196609, 1, 262155, 196609, 1, 393230, 196609, 1, 16, 196609, 1, 983068, 196609, 1, 131100, 196609, 1)
 
-[node name="Player" parent="." instance=ExtResource("2_gcyv7")]
-position = Vector2(148, 88)
+[node name="Player" parent="TileMap" instance=ExtResource("2_gcyv7")]
+position = Vector2(263, 87)
 
-[node name="Slime" parent="." node_paths=PackedStringArray("endPoint") instance=ExtResource("4_f0ut4")]
-position = Vector2(268, 182)
+[node name="Slime" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("4_f0ut4")]
+position = Vector2(264, 86)
 endPoint = NodePath("Marker2D")
 
-[node name="Marker2D" type="Marker2D" parent="Slime"]
+[node name="Marker2D" type="Marker2D" parent="TileMap/Slime"]
 position = Vector2(62, -91)

@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var anims: AnimationPlayer = $AnimationPlayer
 
 
-var speed = 70
+var speed = 40
 var startPosition: Vector2
 var endPosition: Vector2
 var limit = 0.5

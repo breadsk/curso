@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var anims: AnimationPlayer = $AnimationPlayer
 
 
-var speed = 70
+var speed = 50
 var lastDir = "D"
 var life = 5
 

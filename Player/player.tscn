@@ -186,11 +186,13 @@ script = ExtResource("1_u1pc4")
 
 [node name="Player" type="Sprite2D" parent="."]
 clip_children = 2
+position = Vector2(0, -17)
 texture = ExtResource("1_dslo6")
 hframes = 6
 vframes = 10
 
 [node name="ColorRect" type="ColorRect" parent="Player"]
+y_sort_enabled = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -201,9 +203,10 @@ offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
+metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 13.5)
+position = Vector2(0.5, -3.5)
 shape = SubResource("RectangleShape2D_si05f")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -213,6 +216,7 @@ libraries = {
 autoplay = "RESET"
 
 [node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0, -17)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0.5, 8)
