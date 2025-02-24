@@ -29,7 +29,7 @@ func move(delta: float):
 	if moveDirection.length() < limit:
 		changeDirection()
 	velocity = moveDirection.normalized() * speed
-	move_and_slide()
+	move_and_collide(velocity * delta)
 
 func animCtrl():
 	##La primera animación es la predefinida

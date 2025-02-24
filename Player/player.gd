@@ -11,15 +11,16 @@ extends CharacterBody2D
 var speed = 50
 var lastDir = "D"
 var life = 5
+var knockBackPower = 400
 
 func _physics_process(_delta: float):
-	move()
+	move(_delta)
 	animCtrl()
 
-func move():
+func move(delta):
 	#Vector con los 4 mapas de entradas	
 	velocity = Input.get_vector("left","right","up","down") * speed
-	move_and_slide()
+	move_and_collide(velocity * delta)
 
 func animCtrl():
 	##La primera animación es la predefinida
@@ -40,13 +41,22 @@ func animCtrl():
 	else:
 		anims.play("idle"+lastDir)#Lo concatena
 
-func hurt():
+func hurt(area):
 	life -= 1
 	effects.play("hurts")
+	knockBack(area.get_parent().velocity)#Estamos obteniendo el padre del area y la velocidad
 	print(life)
 	await effects.animation_finished
 	effects.play("RESET")
 
-func _on_hurt_box_body_entered(body: Node2D) -> void:
-	if body.name == "Slime":
-		hurt()
+func knockBack(enemyVelocity: Vector2):#Almacena la velocidad aqui
+	var knockBackDir = (enemyVelocity).normalized() * knockBackPower
+	velocity = knockBackDir
+	move_and_slide()
+
+
+func _on_hurt_box_area_entered(area: Area2D):
+	if area.is_in_group("Enemies"):
+		hurt(area)
+	#if area.name == "HitBox":
+	#	hurt()

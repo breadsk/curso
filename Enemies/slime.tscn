@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cltav02fo4cxh"]
+[gd_scene load_steps=13 format=3 uid="uid://cltav02fo4cxh"]
 
 [ext_resource type="Texture2D" uid="uid://cdfdy4kfosxki" path="res://Enemies/slime.png" id="1_23wu6"]
 [ext_resource type="Script" path="res://Enemies/slime.gd" id="1_iggdb"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_18ebi"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2don4"]
 radius = 4.0
 height = 16.0
 
@@ -141,6 +141,9 @@ _data = {
 "walkU": SubResource("Animation_5ava4")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_clk1k"]
+size = Vector2(16, 8)
+
 [node name="Slime" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_iggdb")
@@ -154,9 +157,15 @@ vframes = 13
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_18ebi")
+shape = SubResource("CapsuleShape2D_2don4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_yufrg")
 }
+
+[node name="HitBox" type="Area2D" parent="." groups=["Enemies"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_clk1k")
