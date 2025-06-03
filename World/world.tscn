@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtikr08sysvmo"]
+[gd_scene load_steps=9 format=3 uid="uid://dtikr08sysvmo"]
 
 [ext_resource type="Texture2D" uid="uid://boc8bxcxchg5o" path="res://World/TileSets/grass.png" id="1_um4wh"]
 [ext_resource type="Texture2D" uid="uid://wanwosusryik" path="res://World/TileSets/decor_8x8.png" id="2_7na74"]
 [ext_resource type="PackedScene" uid="uid://c1xi702b12bi0" path="res://Player/player.tscn" id="2_gcyv7"]
 [ext_resource type="PackedScene" uid="uid://cltav02fo4cxh" path="res://Enemies/slime.tscn" id="4_f0ut4"]
+[ext_resource type="PackedScene" uid="uid://d2tbqg5jllqxk" path="res://Enemies/skull.tscn" id="5_ktleo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ejnj"]
 texture = ExtResource("1_um4wh")
@@ -60,3 +61,10 @@ endPoint = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/Slime2"]
 position = Vector2(-93, 109)
+
+[node name="Skull" parent="." node_paths=PackedStringArray("endPoint") instance=ExtResource("5_ktleo")]
+position = Vector2(106, 204)
+endPoint = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="Skull"]
+position = Vector2(212, -2)
