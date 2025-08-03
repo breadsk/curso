@@ -10,12 +10,16 @@ extends CharacterBody2D
 var speed = 50
 var lastDir = "D"
 var life = 5
-var knockBackPower = 400
+var knockBackPower = 500
 var isHurting = false
+var enemyCollisions = []
 
 func _physics_process(_delta: float):
 	move(_delta)
 	animCtrl()
+	if not isHurting:
+		for enemyArea in enemyCollisions:
+			hurt(enemyArea)
 
 func move(delta):
 	#Vector con los 4 mapas de entradas	
@@ -42,7 +46,7 @@ func animCtrl():
 		anims.play("idle"+lastDir)#Lo concatena
 
 func hurt(area):
-	if isHurting: return
+	
 	life -= 1
 	isHurting = true
 	effects.play("hurts")
@@ -62,4 +66,8 @@ func knockBack(enemyVelocity: Vector2):#Almacena la velocidad aqui
 
 func _on_hurt_box_area_entered(area: Area2D):
 	if area.is_in_group("Enemies"):
-		hurt(area)
+		enemyCollisions.append(area)
+
+
+func _on_hurt_box_area_exited(area: Area2D) -> void:
+	enemyCollisions.erase(area)
