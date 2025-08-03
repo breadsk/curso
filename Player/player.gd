@@ -1,17 +1,17 @@
 extends CharacterBody2D
 
 ##Para iniciar algo antes del que juego inicie
-@onready var sprite: Sprite2D = $Player
-
-#Animaciones
-@onready var effects: AnimationPlayer = $Effects
 @onready var anims: AnimationPlayer = $AnimationPlayer
+@onready var effects: AnimationPlayer = $Effects
+@onready var sprite: Sprite2D = $Player
+@onready var hurtTimer: Timer = $HurtTimer
 
 
 var speed = 50
 var lastDir = "D"
 var life = 5
 var knockBackPower = 400
+var isHurting = false
 
 func _physics_process(_delta: float):
 	move(_delta)
@@ -42,12 +42,17 @@ func animCtrl():
 		anims.play("idle"+lastDir)#Lo concatena
 
 func hurt(area):
+	if isHurting: return
 	life -= 1
+	isHurting = true
 	effects.play("hurts")
+	hurtTimer.start()
 	knockBack(area.get_parent().velocity)#Estamos obteniendo el padre del area y la velocidad
 	print(life)
-	await effects.animation_finished
+	await hurtTimer.timeout
+	#await effects.animation_finished
 	effects.play("RESET")
+	isHurting = false
 
 func knockBack(enemyVelocity: Vector2):#Almacena la velocidad aqui
 	var knockBackDir = (enemyVelocity).normalized() * knockBackPower
@@ -58,5 +63,3 @@ func knockBack(enemyVelocity: Vector2):#Almacena la velocidad aqui
 func _on_hurt_box_area_entered(area: Area2D):
 	if area.is_in_group("Enemies"):
 		hurt(area)
-	#if area.name == "HitBox":
-	#	hurt()

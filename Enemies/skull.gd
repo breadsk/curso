@@ -26,8 +26,7 @@ func changeDirection():
 	startPosition = tempEnd
 
 func move():
-	var moveDirection = (endPosition - position)
-	anims.play("waklR")
+	var moveDirection = (endPosition - position)	
 	
 	if moveDirection.length() < limit:
 		changeDirection()
