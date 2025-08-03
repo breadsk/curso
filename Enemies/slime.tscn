@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cltav02fo4cxh"]
+[gd_scene load_steps=14 format=3 uid="uid://cltav02fo4cxh"]
 
 [ext_resource type="Texture2D" uid="uid://cdfdy4kfosxki" path="res://Enemies/slime.png" id="1_23wu6"]
 [ext_resource type="Script" path="res://Enemies/slime.gd" id="1_iggdb"]
@@ -144,6 +144,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_clk1k"]
 size = Vector2(16, 8)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p782b"]
+size = Vector2(18, 10)
+
 [node name="Slime" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_iggdb")
@@ -169,3 +172,11 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_clk1k")
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_p782b")
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c1xi702b12bi0"]
+[gd_scene load_steps=20 format=3 uid="uid://c1xi702b12bi0"]
 
 [ext_resource type="Texture2D" uid="uid://bymorihe3t1qw" path="res://Player/player.png" id="1_dslo6"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_u1pc4"]
@@ -19,6 +19,57 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bhpib"]
+resource_name = "attackD"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_0tgnc"]
+resource_name = "attackR"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7)]
+}
+
+[sub_resource type="Animation" id="Animation_i02x5"]
+resource_name = "attackU"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 8), Vector2i(1, 8), Vector2i(2, 8), Vector2i(3, 8)]
 }
 
 [sub_resource type="Animation" id="Animation_nen2w"]
@@ -132,6 +183,9 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xkbtj"]
 _data = {
 "RESET": SubResource("Animation_gj05i"),
+"attackD": SubResource("Animation_bhpib"),
+"attackR": SubResource("Animation_0tgnc"),
+"attackU": SubResource("Animation_i02x5"),
 "idleD": SubResource("Animation_nen2w"),
 "idleR": SubResource("Animation_dkrbb"),
 "idleU": SubResource("Animation_5vwb6"),
@@ -142,6 +196,8 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fed4g"]
 size = Vector2(15, 15)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jq4p5"]
 
 [sub_resource type="Animation" id="Animation_i2l72"]
 length = 0.001
@@ -222,6 +278,12 @@ position = Vector2(0, -17)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0.5, 10.5)
 shape = SubResource("RectangleShape2D_fed4g")
+
+[node name="HitBox" type="Area2D" parent="." groups=["Player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(3, -1)
+shape = SubResource("CircleShape2D_jq4p5")
 
 [node name="Effects" type="AnimationPlayer" parent="."]
 libraries = {
