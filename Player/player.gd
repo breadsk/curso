@@ -7,16 +7,22 @@ extends CharacterBody2D
 @onready var hurtTimer: Timer = $HurtTimer
 
 
-var speed = 50
+var speed = 60
 var lastDir = "D"
+var attackDir = ""
 var life = 5
 var knockBackPower = 500
 var isHurting = false
+var isAttacking = false
 var enemyCollisions = []
+
+func _ready():
+	$HitBox/CollisionShape2D.disabled = true
 
 func _physics_process(_delta: float):
 	move(_delta)
 	animCtrl()
+	attack()
 	if not isHurting:
 		for enemyArea in enemyCollisions:
 			hurt(enemyArea)
@@ -28,22 +34,41 @@ func move(delta):
 
 func animCtrl():
 	##La primera animación es la predefinida
+	if isAttacking: return
 	if velocity.x > 0:
 		sprite.flip_h = false;#El sprite se queda como esta en su dirección, solo se anima.
 		anims.play("walkR")
 		lastDir = "R"
+		attackDir = "R"
 	elif velocity.x < 0:
 		sprite.flip_h = true;#Aqui es cuando esta yendo hacia la izquierda
 		anims.play("walkR")
 		lastDir = "R"
+		attackDir = "L"
 	elif velocity.y > 0:
 		anims.play("walkD")	
 		lastDir = "D"
+		attackDir = "D"
 	elif velocity.y < 0:
 		anims.play("walkU")
 		lastDir = "U"
+		attackDir = "U"
 	else:
 		anims.play("idle"+lastDir)#Lo concatena
+		
+func attack():
+	if Input.is_action_just_pressed("attack"):
+		isAttacking = true
+		if attackDir == "D":
+			anims.play("attackD")
+		elif attackDir == "R":
+			anims.play("attackR")
+		elif attackDir == "L":
+			anims.play("attackL")
+		elif attackDir == "U":
+			anims.play("attackU")
+		await anims.animation_finished
+		isAttacking = false
 
 func hurt(area):
 	
