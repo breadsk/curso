@@ -15,17 +15,23 @@ var knockBackPower = 500
 var isHurting = false
 var isAttacking = false
 var enemyCollisions = []
+var isDead = false
 
 func _ready():
 	$HitBox/CollisionShape2D.disabled = true
 
-func _physics_process(_delta: float):
+func _physics_process(_delta: float) -> void:
+	if isDead:	return
 	move(_delta)
 	animCtrl()
 	attack()
 	if not isHurting:
 		for enemyArea in enemyCollisions:
 			hurt(enemyArea)
+
+func _process(delta: float) -> void:
+	if life <= 0 and not isDead:
+		die()
 
 func move(delta):
 	#Vector con los 4 mapas de entradas	
@@ -82,6 +88,12 @@ func hurt(area):
 	#await effects.animation_finished
 	effects.play("RESET")
 	isHurting = false
+
+func die():
+	if life <= 0:
+		isDead = true
+		anims.play("die")
+		await anims.animation_finished
 
 func knockBack(enemyVelocity: Vector2):#Almacena la velocidad aqui
 	var knockBackDir = (enemyVelocity).normalized() * knockBackPower

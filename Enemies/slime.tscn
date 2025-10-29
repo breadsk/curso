@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cltav02fo4cxh"]
+[gd_scene load_steps=18 format=3 uid="uid://cltav02fo4cxh"]
 
 [ext_resource type="Texture2D" uid="uid://cdfdy4kfosxki" path="res://Enemies/slime.png" id="1_23wu6"]
 [ext_resource type="Script" path="res://Enemies/slime.gd" id="1_iggdb"]
@@ -20,6 +20,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4m4ew"]
+resource_name = "die"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slime:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 12), Vector2i(1, 12), Vector2i(2, 12), Vector2i(3, 12), Vector2i(4, 12), Vector2i(5, 12)]
 }
 
 [sub_resource type="Animation" id="Animation_58ktw"]
@@ -133,6 +149,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yufrg"]
 _data = {
 "RESET": SubResource("Animation_86ej5"),
+"die": SubResource("Animation_4m4ew"),
 "idleD": SubResource("Animation_58ktw"),
 "idleR": SubResource("Animation_bb4fi"),
 "idleU": SubResource("Animation_ogff1"),
@@ -147,6 +164,44 @@ size = Vector2(16, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p782b"]
 size = Vector2(18, 10)
 
+[sub_resource type="Animation" id="Animation_84hso"]
+resource_name = "hurt"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slime/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.313726), Color(1, 0.278431, 0.231373, 0.313726), Color(1, 1, 1, 0.313726), Color(1, 0.278431, 0.231373, 0.313726)]
+}
+
+[sub_resource type="Animation" id="Animation_rmuiw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slime/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x6pc3"]
+_data = {
+"RESET": SubResource("Animation_rmuiw"),
+"hurt": SubResource("Animation_84hso")
+}
+
 [node name="Slime" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_iggdb")
@@ -156,6 +211,22 @@ position = Vector2(0, -7)
 texture = ExtResource("1_23wu6")
 hframes = 7
 vframes = 13
+
+[node name="ColorRect" type="ColorRect" parent="Slime"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.02115, 1.03468)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(1, 1, 1, 0)
+metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
@@ -178,5 +249,10 @@ shape = SubResource("RectangleShape2D_clk1k")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_p782b")
+
+[node name="Effects" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x6pc3")
+}
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

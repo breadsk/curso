@@ -10,15 +10,28 @@ var startPosition: Vector2
 var endPosition: Vector2
 var limit = 0.5
 var lastDir = "D"
+var slimeLife = 3
+var isDied = false
 
-func _ready():
+func _ready():	
 	startPosition = position
 	endPosition = endPoint.global_position
 	
-func _physics_process(delta: float):
-	move(delta)
-	animCtrl()
-	
+func _physics_process(delta: float) -> void:
+	if not isDied:
+		move(delta)
+		animCtrl()
+	else:
+		#Si esta muerto no hace nada mas
+		return
+
+func _process(delta: float) -> void:
+	#Solo verifica muerte, no manejar animaciones aqui
+	#var fps_actuales = 1.0 / delta
+	#print("Ejecuciones por segundo: "  , fps_actuales)
+	if slimeLife <= 0 and not isDied:
+		die()
+
 func changeDirection():
 	var tempEnd = endPosition
 	endPosition = startPosition
@@ -32,6 +45,8 @@ func move(delta: float):
 	move_and_collide(velocity * delta)
 
 func animCtrl():
+	if isDied: #No animar si está muerto
+		return 
 	##La primera animación es la predefinida
 	if velocity.x > 0:
 		slime.flip_h = false;
@@ -50,7 +65,31 @@ func animCtrl():
 	else:
 		anims.play("idle"+lastDir)#Lo concatena
 
+func hurt():
+	if isDied:	return
+	#1. Detener animaciones de movimiento
+	anims.stop()
+	#2. Reproducir animación de dato
+	$Effects.play("hurt")
+	await $Effects.animation_finished
+	#3. Aplicar daño
+	slimeLife -= 1	
+	print("Print del slimLife: ",slimeLife)
+	#4. Verificar muerte INMEDIATAMENTE
+	if slimeLife <= 0:
+		die()
+	else:
+		#5 Solo resetar si sigue vivo
+		$Effects.play("RESET")
+		
+
+func die():
+	if slimeLife <= 0 and not isDied:
+		isDied = true
+		anims.play("die")
+		await anims.animation_finished
+		queue_free()
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Player"):
-		queue_free()
+		hurt()
