@@ -12,6 +12,7 @@ var limit = 0.5
 var lastDir = "D"
 var slimeLife = 3
 var isDied = false
+var isHurting = false
 
 func _ready():	
 	startPosition = position
@@ -67,19 +68,21 @@ func animCtrl():
 
 func hurt():
 	if isDied:	return
-	#1. Detener animaciones de movimiento
+	
+	isHurting = true
+	
 	anims.stop()
-	#2. Reproducir animación de dato
-	$Effects.play("hurt")
+	
+	$Effects.play("hurts")
 	await $Effects.animation_finished
-	#3. Aplicar daño
+	
 	slimeLife -= 1	
-	print("Print del slimLife: ",slimeLife)
-	#4. Verificar muerte INMEDIATAMENTE
+	isHurting = false
+			
 	if slimeLife <= 0:
+		$Effects.play("RESET")
 		die()
 	else:
-		#5 Solo resetar si sigue vivo
 		$Effects.play("RESET")
 		
 
