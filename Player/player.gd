@@ -10,7 +10,8 @@ extends CharacterBody2D
 var speed = 60
 var lastDir = "D"
 var attackDir = ""
-var life = 5
+var maxHealth = 5
+var currentHealth = maxHealth
 var knockBackPower = 500
 var isHurting = false
 var isAttacking = false
@@ -30,7 +31,7 @@ func _physics_process(_delta: float) -> void:
 			hurt(enemyArea)
 
 func _process(delta: float) -> void:
-	if life <= 0 and not isDead:
+	if currentHealth <= 0 and not isDead:
 		die()
 
 func move(delta):
@@ -78,19 +79,19 @@ func attack():
 
 func hurt(area):
 	
-	life -= 1
+	currentHealth -= 1
 	isHurting = true
 	effects.play("hurts")
 	hurtTimer.start()
 	knockBack(area.get_parent().velocity)#Estamos obteniendo el padre del area y la velocidad
-	print(life)
+	print(maxHealth)
 	await hurtTimer.timeout
 	#await effects.animation_finished
 	effects.play("RESET")
 	isHurting = false
 
 func die():
-	if life <= 0:
+	if currentHealth <= 0:
 		isDead = true
 		anims.play("die")
 		await anims.animation_finished
