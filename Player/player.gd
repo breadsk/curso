@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-##Para iniciar algo antes del que juego inicie
+signal healthChange
+
 @onready var anims: AnimationPlayer = $AnimationPlayer
 @onready var effects: AnimationPlayer = $Effects
 @onready var sprite: Sprite2D = $Player
@@ -80,6 +81,7 @@ func attack():
 func hurt(area):
 	
 	currentHealth -= 1
+	healthChange.emit(currentHealth)
 	isHurting = true
 	effects.play("hurts")
 	hurtTimer.start()
