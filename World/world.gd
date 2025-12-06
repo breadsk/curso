@@ -5,6 +5,6 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
-	heartsContainer.maxHearts(player.maxHealth)
+	heartsContainer.maxHearts(player.maxHealth)#recibe 5
 	heartsContainer.updateHearts(player.currentHealth)
 	player.healthChange.connect(heartsContainer.updateHearts)

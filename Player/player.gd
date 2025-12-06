@@ -23,7 +23,7 @@ func _ready():
 	$HitBox/CollisionShape2D.disabled = true
 
 func _physics_process(_delta: float) -> void:
-	if isDead:	return
+	if isDead:	return	
 	move(_delta)
 	animCtrl()
 	attack()

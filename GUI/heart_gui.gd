@@ -3,6 +3,8 @@ extends Panel
 
 func update(whole:bool):
 	if whole:
+		#true
 		sprite.frame = 0
 	else:
+		#false
 		sprite.frame = 4

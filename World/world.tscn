@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dtikr08sysvmo"]
+[gd_scene load_steps=15 format=3 uid="uid://dtikr08sysvmo"]
 
 [ext_resource type="Script" path="res://World/world.gd" id="1_iblot"]
 [ext_resource type="Texture2D" uid="uid://boc8bxcxchg5o" path="res://World/TileSets/grass.png" id="1_um4wh"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cltav02fo4cxh" path="res://Enemies/slime.tscn" id="4_f0ut4"]
 [ext_resource type="Texture2D" uid="uid://7yls7hohw1s0" path="res://World/TileSets/objects.png" id="4_q4bng"]
 [ext_resource type="PackedScene" uid="uid://cthy5mb8l2suo" path="res://GUI/hearts_container.tscn" id="7_1r0bx"]
+[ext_resource type="PackedScene" uid="uid://bikifn11xtm0y" path="res://GUI/inventory_gui.tscn" id="9_3pdsu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ejnj"]
 texture = ExtResource("1_um4wh")
@@ -182,3 +183,16 @@ offset_left = 7.0
 offset_top = 7.0
 offset_right = 91.0
 offset_bottom = 20.0
+
+[node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("9_3pdsu")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -42.0
+offset_right = 68.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
