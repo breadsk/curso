@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dtikr08sysvmo"]
+[gd_scene load_steps=16 format=3 uid="uid://dtikr08sysvmo"]
 
 [ext_resource type="Script" path="res://World/world.gd" id="1_iblot"]
 [ext_resource type="Texture2D" uid="uid://boc8bxcxchg5o" path="res://World/TileSets/grass.png" id="1_um4wh"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cltav02fo4cxh" path="res://Enemies/slime.tscn" id="4_f0ut4"]
 [ext_resource type="Texture2D" uid="uid://7yls7hohw1s0" path="res://World/TileSets/objects.png" id="4_q4bng"]
 [ext_resource type="PackedScene" uid="uid://cthy5mb8l2suo" path="res://GUI/hearts_container.tscn" id="7_1r0bx"]
+[ext_resource type="Script" path="res://World/canvas_layer.gd" id="8_jvdte"]
 [ext_resource type="PackedScene" uid="uid://bikifn11xtm0y" path="res://GUI/inventory_gui.tscn" id="9_3pdsu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ejnj"]
@@ -177,6 +178,7 @@ endPoint = NodePath("Marker2D")
 position = Vector2(245, 42)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("8_jvdte")
 
 [node name="HeartsContainer" parent="CanvasLayer" instance=ExtResource("7_1r0bx")]
 offset_left = 7.0
@@ -185,6 +187,7 @@ offset_right = 91.0
 offset_bottom = 20.0
 
 [node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("9_3pdsu")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
