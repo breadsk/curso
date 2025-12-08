@@ -8,3 +8,12 @@ func _ready():
 	heartsContainer.maxHearts(player.maxHealth)#recibe 5
 	heartsContainer.updateHearts(player.currentHealth)
 	player.healthChange.connect(heartsContainer.updateHearts)
+
+
+func _on_inventory_gui_opened() -> void:
+	get_tree().paused = true
+	
+
+
+func _on_inventory_gui_closed() -> void:
+	get_tree().paused = false
