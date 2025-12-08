@@ -107,6 +107,8 @@ func knockBack(enemyVelocity: Vector2):#Almacena la velocidad aqui
 func _on_hurt_box_area_entered(area: Area2D):
 	if area.is_in_group("Enemies"):
 		enemyCollisions.append(area)
+	if area.has_method("collect"):
+		area.collect()
 
 
 func _on_hurt_box_area_exited(area: Area2D) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dtikr08sysvmo"]
+[gd_scene load_steps=18 format=3 uid="uid://dtikr08sysvmo"]
 
 [ext_resource type="Script" path="res://World/world.gd" id="1_iblot"]
 [ext_resource type="Texture2D" uid="uid://boc8bxcxchg5o" path="res://World/TileSets/grass.png" id="1_um4wh"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c3yuta0xbmun2" path="res://World/TileSets/plains.png" id="3_e7oi1"]
 [ext_resource type="PackedScene" uid="uid://cltav02fo4cxh" path="res://Enemies/slime.tscn" id="4_f0ut4"]
 [ext_resource type="Texture2D" uid="uid://7yls7hohw1s0" path="res://World/TileSets/objects.png" id="4_q4bng"]
+[ext_resource type="PackedScene" uid="uid://3j7fphbxdeps" path="res://Colectables/life_pot.tscn" id="6_8piml"]
 [ext_resource type="PackedScene" uid="uid://cthy5mb8l2suo" path="res://GUI/hearts_container.tscn" id="7_1r0bx"]
 [ext_resource type="Script" path="res://World/canvas_layer.gd" id="8_jvdte"]
 [ext_resource type="PackedScene" uid="uid://bikifn11xtm0y" path="res://GUI/inventory_gui.tscn" id="9_3pdsu"]
@@ -135,12 +136,18 @@ texture = ExtResource("4_q4bng")
 8:0/0 = 0
 8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.86142, -4.7622, 7.14331, -4.86142, 7.14331, 8, -7.24252, 8)
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_3t4ta"]
+resource_name = "Collectables"
+scenes/1/scene = ExtResource("6_8piml")
+
 [sub_resource type="TileSet" id="TileSet_qn37d"]
 physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_5ejnj")
 sources/1 = SubResource("TileSetAtlasSource_snj85")
 sources/2 = SubResource("TileSetAtlasSource_6f6xq")
 sources/3 = SubResource("TileSetAtlasSource_552fu")
+sources/4 = SubResource("TileSetScenesCollectionSource_3t4ta")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_iblot")
@@ -159,6 +166,8 @@ layer_2/tile_data = PackedInt32Array(196617, 3, 5, 851985, 3, 5, 917514, 393219,
 layer_3/name = "Decos2"
 layer_3/y_sort_enabled = true
 layer_3/tile_data = PackedInt32Array(720897, 3, 0, 524299, 3, 1, 327707, 3, 0)
+layer_4/name = "Collectables"
+layer_4/tile_data = PackedInt32Array(458766, 4, 65536, 458773, 4, 65536, 983068, 4, 65536)
 
 [node name="Player" parent="TileMap" instance=ExtResource("2_gcyv7")]
 position = Vector2(293, 56)
