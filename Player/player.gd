@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal healthChange
 
+@export var inventory : Inventory
 @onready var anims: AnimationPlayer = $AnimationPlayer
 @onready var effects: AnimationPlayer = $Effects
 @onready var sprite: Sprite2D = $Player
@@ -108,7 +109,7 @@ func _on_hurt_box_area_entered(area: Area2D):
 	if area.is_in_group("Enemies"):
 		enemyCollisions.append(area)
 	if area.has_method("collect"):
-		area.collect()
+		area.collect(inventory)
 
 
 func _on_hurt_box_area_exited(area: Area2D) -> void:

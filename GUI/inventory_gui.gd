@@ -10,7 +10,8 @@ signal closed
 var isOpen = false
 
 func _ready() -> void:
-	update()
+	inventory.updated.connect(update)
+	update()	
 
 func update():
 	for i in range(min(inventory.items.size(),slots.size())):
